@@ -8,6 +8,17 @@ from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 from sentence_transformers import SentenceTransformer  # BERT Embeddings
+import os
+import kaggle
+
+# 📌 Automatically download the dataset from Kaggle
+KAGGLE_DATASET = "sohrabbahari/ai-resume-screening-dataset"  # Replace with your dataset name
+
+if not os.path.exists("dataset/Resume.csv"):
+    print("⚡ Downloading dataset from Kaggle...")
+    kaggle.api.dataset_download_files(KAGGLE_DATASET, path="dataset", unzip=True)
+    print("✅ Dataset downloaded successfully!")
+
 
 # 📌 Load the Preprocessed Dataset
 df = pd.read_csv("dataset/cleaned_resumes.csv")
